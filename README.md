@@ -101,6 +101,7 @@ This Dockerfile allows you to build images to deploy your own [Hub](http://www.j
   {
     rotate 7
     daily
+    dateext
     missingok
     notifempty
     sharedscripts
