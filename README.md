@@ -26,7 +26,7 @@ This Dockerfile allows you to build images to deploy your own [Hub](http://www.j
   HUB_LOGS="/var/log/hub"
 
   DOMAIN=example.com
-  PORT=8011
+  PORT=8010
   ```
 
 2. Create directories to store data and logs outside of the container.
