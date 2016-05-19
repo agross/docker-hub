@@ -26,7 +26,11 @@ RUN HUB_VERSION=2.0.182 && \
     wget "$DOWNLOAD_URL" --progress bar:force:noscroll --output-document hub.zip && \
     \
     echo Extracting to $(pwd) && \
-    unzip ./hub.zip -d . -x hub-ring-bundle-$HUB_VERSION/internal/java/linux-amd64/man/* hub-ring-bundle-$HUB_VERSION/internal/java/windows-amd64/* hub-ring-bundle-$HUB_VERSION/internal/java/mac-x64/* && \
+    unzip ./hub.zip \
+      -d . \
+      -x hub-ring-bundle-$HUB_VERSION/internal/java/linux-amd64/man/* \
+         hub-ring-bundle-$HUB_VERSION/internal/java/windows-amd64/* \
+         hub-ring-bundle-$HUB_VERSION/internal/java/mac-x64/* && \
     rm -f hub.zip && \
     mv hub-ring-bundle-$HUB_VERSION/* . && \
     rm -rf hub-ring-bundle-$HUB_VERSION && \
