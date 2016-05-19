@@ -76,9 +76,13 @@ This Dockerfile allows you to build images to deploy your own [Hub](http://www.j
 
   [Service]
   Restart=always
+  # When docker stop is executed, the docker-entrypoint.sh trap + wait combination
+  # will generate an exit status of 143 = 128 + 15 (SIGTERM).
+  # More information: http://veithen.github.io/2014/11/16/sigterm-propagation.html
+  SuccessExitStatus=143
   PrivateTmp=true
   ExecStart=/usr/bin/docker start --attach=true hub
-  ExecStop=/usr/bin/docker stop --time=10 hub
+  ExecStop=/usr/bin/docker stop --time=60 hub
 
   [Install]
   WantedBy=multi-user.target
