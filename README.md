@@ -1,6 +1,6 @@
 # docker-hub
 
-[![](https://imagelayers.io/badge/agross/hub:latest.svg)](https://imagelayers.io/?images=agross/hub:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/agross/hub.svg)](https://microbadger.com/images/agross/hub "Get your own image badge on microbadger.com")
 
 This Dockerfile allows you to build images to deploy your own [Hub](http://www.jetbrains.com/hub/) instance. It has been tested on [Fedora 23](https://getfedora.org/) and [CentOS 7](https://www.centos.org/).
 
