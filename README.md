@@ -176,10 +176,10 @@ This Dockerfile allows you to build images to deploy your own [Hub](http://www.j
 
   Follow the steps of the installation [instructions for JetBrains Hub](https://confluence.jetbrains.com/display/YTD65/Installing+Hub+with+ZIP+Distribution) using paths inside the docker container located under
 
-    * `/hub/backups`,
-    * `/hub/data`,
-    * `/hub/logs` and
-    * `/hub/temp`.
+  * `/hub/backups`,
+  * `/hub/data`,
+  * `/hub/logs` and
+  * `/hub/temp`.
 
 9. Update to a newer version.
 
