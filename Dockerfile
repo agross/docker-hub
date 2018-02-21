@@ -9,7 +9,7 @@ EXPOSE 8080
 
 WORKDIR /hub
 
-RUN HUB_VERSION=2017.4.7722 && \
+RUN HUB_VERSION=2018.1.8691 && \
     \
     echo Creating hub user and group with static ID of 4000 && \
     addgroup -g 4000 -S hub && \
@@ -21,19 +21,19 @@ RUN HUB_VERSION=2017.4.7722 && \
                      wget \
                      ca-certificates && \
     \
-    DOWNLOAD_URL=https://download.jetbrains.com/hub/${HUB_VERSION%.*}/hub-ring-bundle-$HUB_VERSION.zip && \
+    DOWNLOAD_URL=https://download.jetbrains.com/hub/hub-$HUB_VERSION.zip && \
     echo Downloading $DOWNLOAD_URL to $(pwd) && \
     wget "$DOWNLOAD_URL" --progress bar:force:noscroll --output-document hub.zip && \
     \
     echo Extracting to $(pwd) && \
     unzip ./hub.zip \
       -d . \
-      -x hub-ring-bundle-$HUB_VERSION/internal/java/linux-amd64/man/* \
-         hub-ring-bundle-$HUB_VERSION/internal/java/windows-amd64/* \
-         hub-ring-bundle-$HUB_VERSION/internal/java/mac-x64/* && \
+      -x hub-$HUB_VERSION/internal/java/linux-amd64/man/* \
+         hub-$HUB_VERSION/internal/java/windows-amd64/* \
+         hub-$HUB_VERSION/internal/java/mac-x64/* && \
     rm -f hub.zip && \
-    mv hub-ring-bundle-$HUB_VERSION/* . && \
-    rm -rf hub-ring-bundle-$HUB_VERSION && \
+    mv hub-$HUB_VERSION/* . && \
+    rm -rf hub-$HUB_VERSION && \
     \
     chown -R hub:hub . && \
     chmod +x /docker-entrypoint.sh
