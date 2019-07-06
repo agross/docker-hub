@@ -9,7 +9,7 @@ EXPOSE 8080
 
 WORKDIR /hub
 
-RUN HUB_VERSION=2018.4.11375 && \
+RUN HUB_VERSION=2019.1.11584 && \
     \
     echo Creating hub user and group with static ID of 4000 && \
     addgroup -g 4000 -S hub && \
