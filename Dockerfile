@@ -12,31 +12,42 @@ WORKDIR /hub
 HEALTHCHECK --start-period=1m \
             CMD wget --server-response --output-document=/dev/null http://localhost:8080 || exit 1
 
-RUN HUB_VERSION=2019.1.11584 && \
-    \
-    echo Creating hub user and group with static ID of 4000 && \
+ARG VERSION=2019.1.11584
+ARG DOWNLOAD_URL=https://download.jetbrains.com/hub/hub-$VERSION.zip
+ARG SHA_DOWNLOAD_URL=https://download.jetbrains.com/hub/hub-$VERSION.zip.sha256
+
+RUN echo Creating hub user and group with static ID of 4000 && \
     addgroup -g 4000 -S hub && \
     adduser -g "JetBrains Hub" -S -h "$(pwd)" -u 4000 -G hub hub && \
     \
     echo Installing packages && \
-    apk add --update coreutils \
-                     bash \
-                     wget \
-                     ca-certificates && \
+    apk add --update bash \
+                     ca-certificates \
+                     coreutils \
+                     wget && \
     \
-    DOWNLOAD_URL=https://download.jetbrains.com/hub/hub-$HUB_VERSION.zip && \
     echo Downloading $DOWNLOAD_URL to $(pwd) && \
-    wget "$DOWNLOAD_URL" --progress bar:force:noscroll --output-document hub.zip && \
+    wget --progress bar:force:noscroll \
+         "$DOWNLOAD_URL" && \
+    \
+    echo Verifying download && \
+    wget --progress bar:force:noscroll \
+         --output-document \
+         download.sha256 \
+         "$SHA_DOWNLOAD_URL" && \
+    \
+    sha256sum -c download.sha256 && \
+    rm download.sha256 && \
     \
     echo Extracting to $(pwd) && \
-    unzip ./hub.zip \
-      -d . \
-      -x hub-$HUB_VERSION/internal/java/linux-amd64/man/* \
-         hub-$HUB_VERSION/internal/java/windows-amd64/* \
-         hub-$HUB_VERSION/internal/java/mac-x64/* && \
-    rm -f hub.zip && \
-    mv hub-$HUB_VERSION/* . && \
-    rm -rf hub-$HUB_VERSION && \
+    unzip ./hub-$VERSION.zip \
+          -d . \
+          -x hub-$VERSION/internal/java/linux-amd64/man/* \
+             hub-$VERSION/internal/java/windows-amd64/* \
+             hub-$VERSION/internal/java/mac-x64/* && \
+    rm hub-$VERSION.zip && \
+    mv hub-$VERSION/* . && \
+    rm -r hub-$VERSION && \
     \
     chown -R hub:hub . && \
     chmod +x /docker-entrypoint.sh
