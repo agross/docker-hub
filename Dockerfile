@@ -9,6 +9,9 @@ EXPOSE 8080
 
 WORKDIR /hub
 
+HEALTHCHECK --start-period=1m \
+            CMD wget --server-response --output-document=/dev/null http://localhost:8080 || exit 1
+
 RUN HUB_VERSION=2019.1.11584 && \
     \
     echo Creating hub user and group with static ID of 4000 && \
