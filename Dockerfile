@@ -12,7 +12,7 @@ WORKDIR /hub
 HEALTHCHECK --start-period=1m \
             CMD wget --server-response --output-document=/dev/null http://localhost:8080 || exit 1
 
-ARG VERSION=2022.3.15181
+ARG VERSION=2022.3.15322
 ARG DOWNLOAD_URL=https://download.jetbrains.com/hub/hub-$VERSION.zip
 ARG SHA_DOWNLOAD_URL=https://download.jetbrains.com/hub/hub-$VERSION.zip.sha256
 
